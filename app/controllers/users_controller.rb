@@ -14,9 +14,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    #
-    # @rewards_id = []
-    # @pledge_dollar_amounts = []
     @projects = []
 
     @user = User.find(params[:id])
@@ -25,6 +22,7 @@ class UsersController < ApplicationController
       @projects << pledge.reward.project
       #@pledge_dollar_amounts << pledge.dollar_amount
     end
+    @projects = @projects.uniq
     # Project.all.rewards.each do |reward|
     #   reward.pledges.where(user_id: params[:id]).each do |pledge|
     #     pledge.dollar_amount
