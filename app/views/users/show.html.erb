@@ -3,7 +3,20 @@
   <p>Name: <%= @user.first_name %> <%= @user.last_name %></p>
   <p>Email: <%= @user.email %></p>
 
+<h2>Projects</h2>
+<% @projects.each do |project| %>
+  <% if project_owner(project) %>
+    <p><%= project.title %></p>
+    <p><%= project.description %></p>
+    <p>$<%= project.goal %></p>
+    <p><%= project.pledges.sum(:dollar_amount) %></p>
+    <p><%= project.start_date %> <%= project.end_date %></p>
+  <% end %>
+<% end %>
 
+
+
+<h2>Pledges</h2>
 <% @projects.each do |project| %>
   <h2><%= project.title%></h2>
   <% project.rewards.each do |reward| %>
