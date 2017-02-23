@@ -15,25 +15,29 @@
   <%= image_tag @project.image %>
 <% end %>
 
+
+
 <h2>Rewards</h2>
 <% @project.rewards.each do |reward| %>
   <p><%= number_to_currency(reward.dollar_amount) %></p>
   <p><%= reward.description %></p>
-
-  <%= form_for [reward, reward.pledges.new] do |f| %>
-    <%= f.number_field :dollar_amount, value: reward.dollar_amount, step: 0.01 %>
-    <%= f.submit "Pledge" %>
+  <% if project_owner(reward.project) %>
+    <%= form_for [reward, reward.pledges.new] do |f| %>
+      <%= f.number_field :dollar_amount, value: reward.dollar_amount, step: 0.01 %>
+      <%= f.submit "Pledge" %>
+    <% end %>
   <% end %>
 
 <% end %>
 
-
-<h2>Backers</h2>
-<% if @pledges != [] %>
-  <% @pledges.each do |pledge| %></p>
-    <% if pledge.user_id == pledge.user.id %>
-      <%= pledge.user.first_name %> <%= pledge.user.last_name %> $ <%= pledge.dollar_amount%>
+<% if project_owner(@project) %>
+  <h2>Backers</h2>
+  <% if @pledges != [] %>
+    <% @pledges.each do |pledge| %></p>
+      <% if pledge.user_id == pledge.user.id %>
+        <%= pledge.user.first_name %> <%= pledge.user.last_name %> $ <%= pledge.dollar_amount%>
+      <% end %>
     <% end %>
+    <p>Total Pledges: $ <%= @pledges.sum(:dollar_amount)%></p>
   <% end %>
-  <p>Total Pledges: $ <%= @pledges.sum(:dollar_amount)%></p>
 <% end %>
