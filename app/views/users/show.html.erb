@@ -1,0 +1,18 @@
+<div>
+  <h1>Account</h1>
+  <p>Name: <%= @user.first_name %> <%= @user.last_name %></p>
+  <p>Email: <%= @user.email %></p>
+
+
+<% @projects.each do |project| %>
+  <h1><%= project.title%></h1>
+  <% project.rewards.each do |reward| %>
+    <% reward.pledges.where(user_id: @user.id).each do |pledge| %>
+      <p>$ <%= pledge.dollar_amount%> Reward:  <%= pledge.reward.description%></p>
+    <%end%>
+  <% end %>
+<% end %>
+
+
+
+</div>
