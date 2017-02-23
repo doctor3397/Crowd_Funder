@@ -14,9 +14,9 @@ class UsersController < ApplicationController
   end
 
   def show
-
-    @rewards_id = []
-    @pledge_dollar_amounts = []
+    #
+    # @rewards_id = []
+    # @pledge_dollar_amounts = []
     @projects = []
 
     @user = User.find(params[:id])

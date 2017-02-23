@@ -20,3 +20,9 @@
   <% end %>
 
 <% end %>
+
+
+<h2>Backers</h2>
+<% @pledges.each do |pledge| %>
+  <p><%= pledge.user.first_name %> <%= pledge.user.last_name %></p>
+<% end %>
