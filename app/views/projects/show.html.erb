@@ -24,5 +24,8 @@
 
 <h2>Backers</h2>
 <% @pledges.each do |pledge| %>
-  <p><%= pledge.user.first_name %> <%= pledge.user.last_name %></p>
+  <p><%= pledge.user.first_name %> <%= pledge.user.last_name %>
+  <% uid = pledge.user.id %>
+  <%= @pledges.where(user_id: uid).sum(:dollar_amount) %></p>
+
 <% end %>
