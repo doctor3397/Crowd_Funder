@@ -5,12 +5,13 @@
 
 
 <% @projects.each do |project| %>
-  <h1><%= project.title%></h1>
+  <h2><%= project.title%></h2>
   <% project.rewards.each do |reward| %>
     <% reward.pledges.where(user_id: @user.id).each do |pledge| %>
       <p>$ <%= pledge.dollar_amount%> Reward:  <%= pledge.reward.description%></p>
     <%end%>
   <% end %>
+  Total: <%= project.pledges.where(user_id: @user.id).sum(:dollar_amount)%>
 <% end %>
 
 
