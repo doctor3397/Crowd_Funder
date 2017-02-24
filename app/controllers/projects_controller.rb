@@ -4,6 +4,17 @@ class ProjectsController < ApplicationController
   def index
     @projects = Project.all
     @projects = @projects.order(:end_date)
+
+    # projects currently returns all projects
+    # when params[:search] is present:
+    # * only return projects that have a title matching search
+    
+
+    if params[:search]
+
+    else
+
+    end
   end
 
   def show
@@ -21,6 +32,7 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
     @project.owner_id = current_user.id
     if @project.save
+      UserMailer.create_project_email(current_user).deliver_now
       redirect_to projects_url
     else
       render :new

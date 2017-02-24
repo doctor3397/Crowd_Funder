@@ -7,6 +7,9 @@ class PledgesController < ApplicationController
     @pledge.reward = Reward.find(params[:reward_id])
 
     if @pledge.save
+      # Sends email to user when user is created.
+      UserMailer.pledge_email(current_user).deliver_now
+
       redirect_to project_url(@pledge.project), notice: "You have successfully backed #{@pledge.project.title}!"
     else
       @project = @pledge.project
