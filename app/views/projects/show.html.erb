@@ -1,5 +1,5 @@
 <h1><%= @project.title %></h1>
-
+Owner: <%= link_to " #{@project.owner.first_name} #{@project.owner.last_name}", user_path(@project.owner.id) %>
 <p><%= @project.description %></p>
 <p>Goal: <%= number_to_currency(@project.goal) %></p>
 <p>Total Raised: $<%= @pledges.sum(:dollar_amount).to_i %> </p>
@@ -42,3 +42,30 @@
     <p>Total Pledges: $ <%= @pledges.sum(:dollar_amount)%></p>
   <% end %>
 <% end %>
+
+<h4>New comment</h4>
+
+ <%= form_for [@project, @comment] do |f| %>
+
+
+   <% if @comment.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+       <ul>
+          <% @comment.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+   <div class="field">
+      <%= f.label :comment %><br />
+      <%= f.text_area :comment %>
+    </div>
+
+   <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>
