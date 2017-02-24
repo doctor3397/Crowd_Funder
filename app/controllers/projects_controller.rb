@@ -7,7 +7,7 @@ class ProjectsController < ApplicationController
     @search_results = []
 
     @projects.each do |project|
-      if params[:project_title] && params[:project_title] == project.title
+      if params[:project_title] && project.title.downcase.include?(params[:project_title].downcase)
         @search_results << project
       end
       @search_results
