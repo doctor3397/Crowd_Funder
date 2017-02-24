@@ -9,6 +9,37 @@
   </p>
 </article>
 
+<section class="search">
+  <h1>Search Project</h1>
+  <%= form_tag  root_path, method: "get" do |f| %>
+    <div class="field">
+      <%= label_tag :search_by_project_title %><br/>
+      <%= text_field_tag :project_title %>
+    </div>
+    <div><%= submit_tag "Search" %></div>
+  <% end %>
+</section>
+
+<% if @search_results != [] %>
+  <h2>Search Results</h2>
+  <% @search_results.each do |result|%>
+    <%= link_to result, class: 'project-link' do %>
+      <figure class="project-image">
+        <% if result.image %>
+          <%= image_tag result.image %>
+        <% else %>
+          <%= image_tag ActionController::Base.helpers.asset_path("default.jpg") %>
+        <% end %>
+      </figure>
+      <h1 class="project-title"><%= result.title %></h1>
+      <time class="project-days-left">
+        <%= icon('clock-o') %>
+        <%= "#{time_ago_in_words(result.end_date)} #{( result.end_date > Time.now.utc ) ? 'remaining' : 'past deadline'}" %></time>
+    <% end %>
+  <% end %>
+<% end %>
+
+<h2>All Projects</h2>
 <% @projects.each do |project| %>
   <article class="project">
     <%= link_to project, class: 'project-link' do %>

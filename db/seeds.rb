@@ -5,10 +5,10 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-# Pledge.destroy_all
-# Reward.destroy_all
-# User.destroy_all
-# Project.destroy_all
+Pledge.destroy_all
+Reward.destroy_all
+User.destroy_all
+Project.destroy_all
 
 
 5.times do

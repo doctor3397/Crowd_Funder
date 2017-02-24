@@ -4,16 +4,13 @@ class ProjectsController < ApplicationController
   def index
     @projects = Project.all
     @projects = @projects.order(:end_date)
+    @search_results = []
 
-    # projects currently returns all projects
-    # when params[:search] is present:
-    # * only return projects that have a title matching search
-    
-
-    if params[:search]
-
-    else
-
+    @projects.each do |project|
+      if params[:project_title] && params[:project_title] == project.title
+        @search_results << project
+      end
+      @search_results
     end
   end
 
