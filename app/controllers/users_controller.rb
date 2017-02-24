@@ -16,8 +16,8 @@ class UsersController < ApplicationController
 
   def show
     @projects = []
-
     @user = User.find(params[:id])
+    @owner_projects = Project.all.where(owner_id: @user.id)
     @pledges = Pledge.where(user_id: params[:id])
     @pledges.each do |pledge|
       @projects << pledge.reward.project

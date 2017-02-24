@@ -21,6 +21,7 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     @backers = @project.backers
     @pledges = @project.pledges
+    @comment = Comment.new
   end
 
   def new

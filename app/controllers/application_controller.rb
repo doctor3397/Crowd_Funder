@@ -6,9 +6,12 @@ class ApplicationController < ActionController::Base
   helper_method :project_owner
 
   def project_owner(project)
-    return current_user.id == project.owner_id
+
+    return current_user.present? && current_user.id == project.owner_id
   end
 
+
+  
 
   private
   def not_authenticated
