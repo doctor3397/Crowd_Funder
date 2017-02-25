@@ -28,7 +28,8 @@ end
     description: Faker::Lorem.paragraph,
     goal: rand(100000),
     start_date: Time.now.utc - rand(60).days,
-    end_date: Time.now.utc + rand(10).days
+    end_date: Time.now.utc + rand(10).days,
+    category: ["Art", "Comics", "Crafts", "Dance", "Design", "Fashion", "Film & Video", "Food", "Games", "Journalism", "Music", "Photography", "Publishing", "Technology", "Theater"].sample,
   )
 
 
