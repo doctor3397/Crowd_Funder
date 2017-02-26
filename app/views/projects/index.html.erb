@@ -18,6 +18,19 @@
     </div>
     <div><%= submit_tag "Search" %></div>
   <% end %>
+  <div>Search by Category</div>
+  <%= link_to "Art", "/?project_categoy=Art" %>
+  <%= link_to "Journalism", "/?project_categoy=Journalism" %>
+  <%= link_to "Crafts", "/?project_categoy=Crafts" %>
+  <%= link_to "Dance", "/?project_categoy=Dance" %>
+  <%= link_to "Design", "/?project_categoy=Design" %>
+  <%= link_to "Food", "/?project_categoy=Food" %>
+  <%= link_to "Games", "/?project_categoy=Games" %>
+  <%= link_to "Music", "/?project_categoy=Music" %>
+  <%= link_to "Photography", "/?project_categoy=Photography" %>
+  <%= link_to "Publishing", "/?project_categoy=Publishing" %>
+  <%= link_to "Technology", "/?project_categoy=Technology" %>
+  <%= link_to "Theater", "/?project_categoy=Theater" %>
 </section>
 
 <% if @search_results != [] %>
