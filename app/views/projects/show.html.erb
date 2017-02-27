@@ -12,10 +12,11 @@ Owner: <%= link_to " #{@project.owner.first_name} #{@project.owner.last_name}", 
 <p>Fundraising starts: <%= @project.start_date.strftime("%A %b %d %Y") %></p>
 <p>Deadline: <%= @project.end_date.strftime("%A %b %d %Y") %></p>
 
-<% if @project.image.present? %>
+<% if @project.image != ""%>
   <%= image_tag @project.image %>
+<% elsif @project.photo%>
+  <%= image_tag @project.photo.url.to_s %>
 <% end %>
-
 
 
 <h2>Rewards</h2>

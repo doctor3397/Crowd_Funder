@@ -16,14 +16,17 @@
 
   <div>
     <%= f.label :category %><br/>
-    <%= f.select :category, options_for_select([["Art","Art"], ["Comics", "Comics"], ["Crafts", "Crafts"], ["Dance", "Dance"], ["Design", "Design"]]) %>
-
-    <!-- "Art", "Comics", "Crafts", "Dance", "Design", "Fashion", "Food", "Games", "Journalism", "Music", "Photography", "Publishing", "Technology", "Theater" -->
+    <%= f.select :category, options_for_select([["Art","Art"], ["Comics", "Comics"], ["Crafts", "Crafts"], ["Dance", "Dance"], ["Design", "Design"], ["Fashion", "Fashion"], ["Food", "Food"], ["Games", "Games"], ["Journalism", "Journalism"], ["Music", "Music"], ["Photography", "Photography"], ["Publishing","Publishing"], ["Technology","Technology"], ["Theater","Theater"]]) %>
   </div>
 
   <div>
     <%= f.label :image %>
     <%= f.text_field :image %>
+  </div>
+
+  <div>
+    <%= f.label :photo %>
+    <%= f.file_field :photo %>
   </div>
 
   <div>
