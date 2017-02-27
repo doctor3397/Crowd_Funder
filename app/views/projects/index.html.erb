@@ -18,6 +18,7 @@
     </div>
     <div><%= submit_tag "Search" %></div>
   <% end %>
+
   <div>Search by Category</div>
   <%= link_to "Art", "/?project_categoy=Art" %>
   <%= link_to "Journalism", "/?project_categoy=Journalism" %>
@@ -31,26 +32,10 @@
   <%= link_to "Publishing", "/?project_categoy=Publishing" %>
   <%= link_to "Technology", "/?project_categoy=Technology" %>
   <%= link_to "Theater", "/?project_categoy=Theater" %>
+
+  <div id="search_results"></div>
 </section>
 
-<% if @search_results != [] %>
-  <h2>Search Results</h2>
-  <% @search_results.each do |result|%>
-    <%= link_to result, class: 'project-link' do %>
-      <figure class="project-image">
-        <% if result.image %>
-          <%= image_tag result.image %>
-        <% else %>
-          <%= image_tag ActionController::Base.helpers.asset_path("default.jpg") %>
-        <% end %>
-      </figure>
-      <h1 class="project-title"><%= result.title %></h1>
-      <time class="project-days-left">
-        <%= icon('clock-o') %>
-        <%= "#{time_ago_in_words(result.end_date)} #{( result.end_date > Time.now.utc ) ? 'remaining' : 'past deadline'}" %></time>
-    <% end %>
-  <% end %>
-<% end %>
 
 <h2>All Projects</h2>
 <% @projects.each do |project| %>

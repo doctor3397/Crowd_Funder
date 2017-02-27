@@ -14,6 +14,15 @@ class ProjectsController < ApplicationController
       end
       @search_results
     end
+
+    if request.xhr?
+      respond_to do |format|
+        format.json {
+          render json: @search_results
+        }
+      end
+    end
+
   end
 
   def show
@@ -41,6 +50,6 @@ class ProjectsController < ApplicationController
 
   private
   def project_params
-    params.require(:project).permit(:title, :description, :goal, :start_date, :end_date, :image, rewards_attributes: [:dollar_amount, :description])
+    params.require(:project).permit(:title, :description, :goal, :start_date, :end_date, :image, :category, rewards_attributes: [:dollar_amount, :description, :_destroy])
   end
 end

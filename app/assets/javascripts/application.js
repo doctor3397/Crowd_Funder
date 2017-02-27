@@ -14,3 +14,63 @@
 //= require jquery_ujs
 //= require cocoon
 //= require_tree .
+
+$(function() {
+
+  // Ajax call for search by project_title
+  $('.search input[type="submit"]').click(function(event){
+    event.preventDefault();
+
+    $.ajax({
+      url: "/projects/?project_title=" + $("input#project_title").val(),
+      method: "GET",
+      dataType: 'json'
+
+    }).done(function(data){
+      console.log(data);
+      for(var i=0; i < data.length; i++){
+        var list = '<a class="project-link" href="/projects/' + data[i].id + '"><figure class="project-image"><img src="/assets/' + data[i].image + '"></figure><h1 class="project-title">' + data[i].title+ '</h1>';
+
+        $('#search_results').append(list);
+        //$("input#project_title").reset();
+    }
+
+    }).fail(function(jqXHR, textStatus, errorThrown){
+      console.log('Ajax Request Failed');
+      console.log(jqXHR);
+    }).always(function(){
+      console.log('Ajax Request Sent');
+    });
+  });
+
+  // Ajax call for search by category
+  $('.search > a').click(function(event){
+    event.preventDefault();
+
+    var link = $(this);
+    // console.log(link);
+    console.log(link.attr('href'));
+
+    $.ajax({
+      url:  $(this).attr('href'),
+      method: "GET",
+      dataType: 'json'
+
+    }).done(function(data){
+
+      //console.log(data);
+      for(var i=0; i < data.length; i++){
+        var list = '<a class="project-link" href="/projects/' + data[i].id + '"><figure class="project-image"><img src="/assets/' + data[i].image + '"></figure><h1 class="project-title">' + data[i].title+ '</h1>';
+
+        $('#search_results').append(list);
+      }
+
+    }).fail(function(jqXHR, textStatus, errorThrown){
+      console.log('Ajax Request Failed');
+      console.log(jqXHR);
+    }).always(function(){
+      console.log('Ajax Request Sent');
+    });
+  });
+
+});
