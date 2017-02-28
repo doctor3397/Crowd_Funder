@@ -21,7 +21,7 @@ Project.destroy_all
   )
 end
 
-25.times do
+25.times do |i|
   p = Project.create!(
     title: Faker::App.name,
     owner_id: rand(5),
@@ -29,7 +29,8 @@ end
     goal: rand(100000),
     start_date: Time.now.utc - rand(60).days,
     end_date: Time.now.utc + rand(10).days,
-    category: ["Art", "Comics", "Crafts", "Dance", "Design", "Fashion", "Food", "Games", "Journalism", "Music", "Photography", "Publishing", "Technology", "Theater"].sample
+    category: ["Art", "Comics", "Crafts", "Dance", "Design", "Fashion", "Food", "Games", "Journalism", "Music", "Photography", "Publishing", "Technology", "Theater"].sample,
+    # image: image_url(i+1)
   )
 
 
