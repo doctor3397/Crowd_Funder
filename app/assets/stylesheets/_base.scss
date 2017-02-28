@@ -20,3 +20,13 @@ figure {
     display: block;
   }
 }
+
+a {
+  color:#06cb2c;
+}
+
+a:hover {
+  text-decoration: none;
+  color: darken(#06cb2c, 20%);
+  border-bottom: solid 2px darken(#06cb2c, 15%);
+}

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <%= stylesheet_link_tag    "https://fonts.googleapis.com/css?family=Josefin+Sans:700|Libre+Baskerville" %>
+    <%= stylesheet_link_tag    "https://fonts.googleapis.com/css?family=Lato:400,100,300,300italic" %>
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
     <%= csrf_meta_tags %>
@@ -13,18 +13,31 @@
 
   <body>
     <header class="site-header">
-      <%= link_to "Crowdfunder", root_path %>
-
-
-      <nav class="site-nav">
-        <%= link_to "Create A Project", new_project_path %>
-        <% if current_user %>
-          <%= link_to "Logout", :logout, method: :post %>
-          <%= link_to 'My Page', user_path(current_user)%>
-        <% else %>
-          <%= link_to "Register", new_user_path %> |
-          <%= link_to "Login", :login %>
-        <% end %>
+      <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <%= link_to image_tag("icon.png"), root_path %>
+          </div>
+          <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+              <% if current_user %>
+                <li><p>Hello <%= current_user.first_name %></p></li>
+                <li><%= link_to "New Project", new_project_path %></li>
+                <li><%= link_to "Logout", :logout, method: :post %></li>
+                <li><%= link_to 'My Page', user_path(current_user)%></li>
+              <% else %>
+                <li><%= link_to "Login", :login %></li>
+                <li><%= link_to 'Sign Up', new_user_path %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
       </nav>
     </header>
 
@@ -36,8 +49,6 @@
       <%= yield %>
     </main>
 
-    <footer class="site-footer">
-      <small>A Bitmaker assignment</small>
     </footer>
   </body>
 </html>

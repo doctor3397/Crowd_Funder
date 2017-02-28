@@ -1,7 +1,9 @@
-html {
+html, body, main {
   font-family: $base-font-family;
-  font-size: 16px;
-  line-height: 1.35;
+  font-size: 20px;
+  line-height: 1.5;
+  font-weight: 300;
+  text-rendering: optimizeLegibility;
 }
 
 h1,
@@ -12,4 +14,30 @@ h5,
 h6 {
   font-family: $header-font-family;
   line-height: 1.1;
+  text-align: left;
+}
+
+h1 {
+  font-size: 200%;
+  word-spacing: 2px;
+  letter-spacing: 1px;
+  padding: 40px 10px 0 0;
+  text-transform: uppercase;
+  font-weight: 300;
+  color: #06cb2c;
+}
+
+h2 {
+  font-size: 150%;
+  word-spacing: 1.5px;
+  letter-spacing: 1px;
+  padding: 40px 8px 0 0;
+  text-transform: uppercase;
+  font-weight: 300;
+  color: #06cb2c;
+}
+
+h1:hover,
+h2:hover {
+  text-decoration: none;
 }

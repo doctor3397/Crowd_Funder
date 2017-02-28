@@ -2,16 +2,16 @@ input[type=text],
 input[type=password],
 input[type=email] {
   padding: 0.25em 0.5em;
-  border: 1px solid #f0f0f0;
+  border: 1px solid #rgba(6, 203, 44, 0.28);
 }
 
 input[type=submit] {
   padding: 0.5em;
   color: white;
-  background-color: cadetblue;
+  background-color: #06cb2c;
   border: 0;
 
   &:hover {
-    background-color: darken(cadetblue, 8%);
+    background-color: darken(#06cb2c, 8%);
   }
 }

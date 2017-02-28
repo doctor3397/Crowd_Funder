@@ -9,53 +9,56 @@
   </p>
 </article>
 
-<section class="search">
-  <h1>Search Project</h1>
-  <%= form_tag  root_path, method: "get" do |f| %>
-    <div class="field">
-      <%= label_tag :search_by_project_title %><br/>
-      <%= text_field_tag :project_title %>
-    </div>
-    <div><%= submit_tag "Search" %></div>
+<div class="container">
+  <section class="search">
+    <h1>Search Project</h1>
+    <%= form_tag  root_path, method: "get" do |f| %>
+      <h2>By Project Title</h2>
+      <div class="col-md-9">
+        <%= text_field_tag :project_title %>
+      </div>
+      <div class="col-md-3">
+        <%= submit_tag "Search" %>
+      </div>
+    <% end %>
+
+    <h2>By Category</h2>
+    <%= link_to "Art", "/?project_categoy=Art" %>
+    <%= link_to "Journalism", "/?project_categoy=Journalism" %>
+    <%= link_to "Crafts", "/?project_categoy=Crafts" %>
+    <%= link_to "Dance", "/?project_categoy=Dance" %>
+    <%= link_to "Design", "/?project_categoy=Design" %>
+    <%= link_to "Food", "/?project_categoy=Food" %>
+    <%= link_to "Games", "/?project_categoy=Games" %>
+    <%= link_to "Music", "/?project_categoy=Music" %>
+    <%= link_to "Photography", "/?project_categoy=Photography" %>
+    <%= link_to "Publishing", "/?project_categoy=Publishing" %>
+    <%= link_to "Technology", "/?project_categoy=Technology" %>
+    <%= link_to "Theater", "/?project_categoy=Theater" %>
+
+    <div id="search_results"></div>
+  </section>
+
+
+  <h1>All Projects</h1>
+  <% @projects.each do |project| %>
+    <article class="project">
+      <%= link_to project, class: 'project-link' do %>
+        <figure class="project-image">
+          <% if project.image.present? %>
+            <%= image_tag project.image %>
+          <% end %>
+          <% if project.photo.present? %>
+            <%= image_tag project.photo.url.to_s %>
+          <% end %>
+
+        </figure>
+        <h2 class="project-title"><%= project.title %></h2>
+        <time class="project-days-left">
+          <%= icon('clock-o') %>
+          <%= "#{time_ago_in_words(project.end_date)} #{( project.end_date > Time.now.utc ) ? 'remaining' : 'past deadline'}" %></time>
+      <% end %>
+    </article>
   <% end %>
 
-  <div>Search by Category</div>
-  <%= link_to "Art", "/?project_categoy=Art" %>
-  <%= link_to "Journalism", "/?project_categoy=Journalism" %>
-  <%= link_to "Crafts", "/?project_categoy=Crafts" %>
-  <%= link_to "Dance", "/?project_categoy=Dance" %>
-  <%= link_to "Design", "/?project_categoy=Design" %>
-  <%= link_to "Food", "/?project_categoy=Food" %>
-  <%= link_to "Games", "/?project_categoy=Games" %>
-  <%= link_to "Music", "/?project_categoy=Music" %>
-  <%= link_to "Photography", "/?project_categoy=Photography" %>
-  <%= link_to "Publishing", "/?project_categoy=Publishing" %>
-  <%= link_to "Technology", "/?project_categoy=Technology" %>
-  <%= link_to "Theater", "/?project_categoy=Theater" %>
-
-  <div id="search_results"></div>
-</section>
-
-
-<h2>All Projects</h2>
-<% @projects.each do |project| %>
-  <article class="project">
-    <%= link_to project, class: 'project-link' do %>
-      <figure class="project-image">
-        <% if project.image.present? %>
-          <%= image_tag project.image %>
-        <% end %>
-        <% if project.photo.present? %>
-          <%= image_tag project.photo.url.to_s %>
-        <% end %>
-
-      </figure>
-      <h1 class="project-title"><%= project.title %></h1>
-      <time class="project-days-left">
-        <%= icon('clock-o') %>
-        <%= "#{time_ago_in_words(project.end_date)} #{( project.end_date > Time.now.utc ) ? 'remaining' : 'past deadline'}" %></time>
-    <% end %>
-  </article>
-<% end %>
-
-<%= link_to "New Project", new_project_path %>
+</div><!--Container-->

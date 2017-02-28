@@ -2,15 +2,85 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.project {
+/* Nav bar*/
+.navbar-default {
+  background-color: white;
+}
+
+.navbar-default .navbar-nav>li>a {
+  color: #06cb2c;
+}
+
+.navbar-default .navbar-nav>li>a:hover {
+  color: darken(#06cb2c, 15%);
+}
+
+.nav li p {
+  padding-top: 10px;
+  padding-right: 5px;
+}
+
+/* Home Page */
+.homepage {
+  margin-top: -20px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), asset-url("home.jpg");
+  height: 50vh;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
   text-align: center;
+  font-size: 300%;
+  font-weight: 400;
+  color: white;
+}
+
+.homepage p {
+    padding-top: 40px;
+}
+
+/* Search */
+input#project_title {
+  width: 60%;
+}
+
+section.search {
+  background-color: rgba(211, 211, 211, 0.21);
+  padding: 20px 40px;
+  margin: 0 -30px;
+}
+
+.search a {
+  padding: 5px;
+}
+
+/* Project */
+.project {
+  text-align: left;
   margin-bottom: 1rem;
+}
+
+article.project {
+  max-width: 32%;
+  display: inline-block;
+}
+
+.project-image {
+  max-width: 350px;
+}
+
+.project-image:hover {
+  transform: scale(0.97);
 }
 
 .project-link {
   display: block;
   text-decoration: none;
-  color: cadetblue;
+  color: #06cb2c;
+}
+
+.project-link:hover{
+  border-bottom: none;
+  color: darken(#06cb2c, 15%);
 }
 
 .project-title {

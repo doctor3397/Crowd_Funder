@@ -1,72 +1,74 @@
-<h1><%= @project.title %></h1>
-Owner: <%= link_to " #{@project.owner.first_name} #{@project.owner.last_name}", user_path(@project.owner.id) %>
-<p><%= @project.description %></p>
-<p>Goal: <%= number_to_currency(@project.goal) %></p>
-<p>Total Raised: $<%= @pledges.sum(:dollar_amount).to_i %> </p>
-<p>Percentage Raised: <%= (@pledges.sum(:dollar_amount))/ (@project.goal) %> %</p>
+<div class="container">
+  <h1><%= @project.title %></h1>
+  Owner: <%= link_to " #{@project.owner.first_name} #{@project.owner.last_name}", user_path(@project.owner.id) %>
+  <!-- <p><%= @project.description %></p> -->
+  <p>Goal: <%= number_to_currency(@project.goal) %></p>
+  <p>Total Raised: $<%= @pledges.sum(:dollar_amount).to_i %> </p>
+  <!-- <p>Percentage Raised: <%= (@pledges.sum(:dollar_amount))/ (@project.goal) %> %</p> -->
 
-<time>
-  <%= icon('clock-o') %>
-  <%= "#{time_ago_in_words(@project.end_date)} #{( @project.end_date > Time.now.utc ) ? 'remaining' : 'past deadline'}" %></time>
+  <time>
+    <%= icon('clock-o') %>
+    <%= "#{time_ago_in_words(@project.end_date)} #{( @project.end_date > Time.now.utc ) ? 'remaining' : 'past deadline'}" %></time>
 
-<p>Fundraising starts: <%= @project.start_date.strftime("%A %b %d %Y") %></p>
-<p>Deadline: <%= @project.end_date.strftime("%A %b %d %Y") %></p>
+  <p>Fundraising starts: <%= @project.start_date.strftime("%A %b %d %Y") %></p>
+  <p>Deadline: <%= @project.end_date.strftime("%A %b %d %Y") %></p>
 
-<% if @project.image != ""%>
-  <%= image_tag @project.image %>
-<% elsif @project.photo%>
-  <%= image_tag @project.photo.url.to_s %>
-<% end %>
-
-
-<h2>Rewards</h2>
-<% @project.rewards.each do |reward| %>
-  <p><%= number_to_currency(reward.dollar_amount) %></p>
-  <p><%= reward.description %></p>
-  <% unless project_owner(reward.project) %>
-    <%= form_for [reward, reward.pledges.new] do |f| %>
-      <%= f.number_field :dollar_amount, value: reward.dollar_amount, step: 0.01 %>
-      <%= f.submit "Pledge" %>
-    <% end %>
+  <% if @project.image != ""%>
+    <%= image_tag @project.image %>
+  <% elsif @project.photo%>
+    <%= image_tag @project.photo.url.to_s %>
   <% end %>
 
-<% end %>
 
-<% if project_owner(@project) %>
-  <h2>Backers</h2>
-  <% if @pledges != [] %>
-    <% @pledges.each do |pledge| %></p>
-      <% if pledge.user_id == pledge.user.id %>
-        <%= pledge.user.first_name %> <%= pledge.user.last_name %> $ <%= pledge.dollar_amount%>
+  <h2>Rewards</h2>
+  <% @project.rewards.each do |reward| %>
+    <p><%= number_to_currency(reward.dollar_amount) %></p>
+    <p><%= reward.description %></p>
+    <% unless project_owner(reward.project) %>
+      <%= form_for [reward, reward.pledges.new] do |f| %>
+        <%= f.number_field :dollar_amount, value: reward.dollar_amount, step: 0.01 %>
+        <%= f.submit "Pledge" %>
       <% end %>
     <% end %>
-    <p>Total Pledges: $ <%= @pledges.sum(:dollar_amount)%></p>
+
   <% end %>
-<% end %>
 
-<h4>New comment</h4>
+  <% if project_owner(@project) %>
+    <h2>Backers</h2>
+    <% if @pledges != [] %>
+      <% @pledges.each do |pledge| %></p>
+        <% if pledge.user_id == pledge.user.id %>
+          <%= pledge.user.first_name %> <%= pledge.user.last_name %> $ <%= pledge.dollar_amount%>
+        <% end %>
+      <% end %>
+      <p>Total Pledges: $ <%= @pledges.sum(:dollar_amount)%></p>
+    <% end %>
+  <% end %>
 
- <%= form_for [@project, @comment] do |f| %>
+  <h4>New comment</h4>
+
+   <%= form_for [@project, @comment] do |f| %>
 
 
-   <% if @comment.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+     <% if @comment.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
 
-       <ul>
-          <% @comment.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-        </ul>
+         <ul>
+            <% @comment.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+     <div class="field">
+        <%= f.label :comment %><br />
+        <%= f.text_area :comment %>
+      </div>
+
+     <div class="actions">
+        <%= f.submit %>
       </div>
     <% end %>
-
-   <div class="field">
-      <%= f.label :comment %><br />
-      <%= f.text_area :comment %>
-    </div>
-
-   <div class="actions">
-      <%= f.submit %>
-    </div>
-  <% end %>
+</div>
