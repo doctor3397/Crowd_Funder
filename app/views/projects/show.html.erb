@@ -22,8 +22,7 @@
 
   <h2>Rewards</h2>
   <% @project.rewards.each do |reward| %>
-    <p><%= number_to_currency(reward.dollar_amount) %></p>
-    <p><%= reward.description %></p>
+    <p><%= number_to_currency(reward.dollar_amount) %> <%= reward.description %></p>
     <% unless project_owner(reward.project) %>
       <%= form_for [reward, reward.pledges.new] do |f| %>
         <%= f.number_field :dollar_amount, value: reward.dollar_amount, step: 0.01 %>
@@ -45,16 +44,22 @@
     <% end %>
   <% end %>
 
-  <h4>New comment</h4>
+  <h2>Comments</h2>
+  <div id="comments">
+    <% @project.comments.order(created_at: :desc).each do |comment| %>
+    <p><%= comment.comment %> by <em><%= comment.user.first_name %></em> <%= comment.created_at.strftime('%b %e, %l:%M %p') %></p>
+    <% end %>
+  </div>
+  <h2>New Comment</h2>
 
-   <%= form_for [@project, @comment] do |f| %>
+  <% if current_user %>
+    <%= form_for [@project, @comment] do |f| %>
 
-
-     <% if @comment.errors.any? %>
+      <% if @comment.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
 
-         <ul>
+          <ul>
             <% @comment.errors.full_messages.each do |msg| %>
               <li><%= msg %></li>
             <% end %>
@@ -62,13 +67,18 @@
         </div>
       <% end %>
 
-     <div class="field">
-        <%= f.label :comment %><br />
+      <div class="field">
         <%= f.text_area :comment %>
       </div>
 
-     <div class="actions">
-        <%= f.submit %>
+      <div class="actions">
+        <%= f.submit :data => { disable_with: false}  %>
       </div>
     <% end %>
+
+  <% else %>
+    <p>To write a comment, please
+      <%= link_to "Login", :login %> or <%= link_to 'Sign Up', new_user_path %>
+    </p>
+  <% end %>
 </div>

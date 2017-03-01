@@ -1,5 +1,28 @@
 
 $(function() {
+  // Ajax call for Comments
+  $('#new_comment').submit(function(event){
+    event.preventDefault();
+
+    $.ajax({
+      url: $(this).attr('action'),
+      method: $(this).attr('method'),
+      data: $(this).serialize(),
+      dataType: 'json'
+
+    }).done(function(data){
+      console.log(data);
+      var list =  "<p>" + data.comment + "<em> by "  + data.user + " </em>" + data.created_at + '</p>';
+      $('#comments').prepend(list);
+      $('#comment_comment').val("");
+
+    }).fail(function(jqXHR, textStatus, errorThrown){
+      console.log('Ajax Request Failed');
+      console.log(jqXHR);
+    }).always(function(){
+      console.log('Ajax Request Sent');
+    });
+  });
 
   // Ajax call for search by project_title
   $('.search input[type="submit"]').click(function(event){
