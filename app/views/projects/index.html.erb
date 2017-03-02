@@ -51,7 +51,6 @@
           <% if project.photo.present? %>
             <%= image_tag project.photo.url.to_s %>
           <% end %>
-
         </figure>
         <h2 class="project-title"><%= project.title %></h2>
         <time class="project-days-left">
@@ -60,5 +59,4 @@
       <% end %>
     </article>
   <% end %>
-
-</div><!--Container-->
+</div>
