@@ -8,8 +8,10 @@ class ProjectsController < ApplicationController
 
     @projects.each do |project|
       if params[:project_title] && project.title.downcase.include?(params[:project_title].downcase)
+        project.image = ActionController::Base.helpers.asset_url(project.image)
         @search_results << project
       elsif params[:project_categoy] && project.category == params[:project_categoy]
+        project.image = ActionController::Base.helpers.asset_url(project.image)
         @search_results << project
       end
       @search_results

@@ -22,7 +22,7 @@
 
 /* Home Page */
 .homepage {
-  margin-top: -20px;
+  padding-top: 50px;
   background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), asset-url("home.jpg");
   height: 50vh;
   background-position: center;
@@ -32,10 +32,6 @@
   font-size: 300%;
   font-weight: 400;
   color: white;
-}
-
-.homepage p {
-    padding-top: 40px;
 }
 
 /* Search */

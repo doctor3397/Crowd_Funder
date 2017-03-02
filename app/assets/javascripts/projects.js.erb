@@ -38,7 +38,7 @@ $(function() {
       $('#search_results').html("");
 
       for(var i=0; i < data.length; i++){
-        var list = '<article class="project"><a class="project-link" href="/projects/' + data[i].id + '"><figure class="project-image"><img src="/assets/' + data[i].image + '"></figure><h2 class="project-title">' + data[i].title+ '</h2></article>';
+        var list = '<article class="project"><a class="project-link" href="/projects/' + data[i].id + '"><figure class="project-image"><img src=' + data[i].image + '></figure><h2 class="project-title">' + data[i].title+ '</h2></article>';
 
         $('#search_results').append(list);
         $("input#project_title").val("");
@@ -67,9 +67,9 @@ $(function() {
 
     }).done(function(data){
       $('#search_results').html("");
-      //console.log(data);
+      console.log(data);
       for(var i=0; i < data.length; i++){
-        var list = '<article class="project"><a class="project-link" href="/projects/' + data[i].id + '"><figure class="project-image"><img src="/assets/' + data[i].image + '"></figure><h2 class="project-title">' + data[i].title+ '</h2></article>';
+        var list = '<article class="project"><a class="project-link" href="/projects/' + data[i].id + '"><figure class="project-image"><img src=' + data[i].image + '></figure><h2 class="project-title">' + data[i].title+ '</h2></article>';
 
         $('#search_results').append(list);
       }
